@@ -1,0 +1,14 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/PhotonLauncher.unity
+    guid: 7e00e0f3c62e7af42a3b91a58dce317a
+  - enabled: 1
+    path: Assets/Scenes/Room.unity
+    guid: 6683f3b00ec72c4418a761dc2f578a2c
+  m_configObjects: {}
