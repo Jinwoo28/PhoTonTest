@@ -26,7 +26,7 @@ public class PlayerCtrl : MonoBehaviourPun
 
     void Update()
     {
-        if (!photonView.IsMine) return;
+        if (!photonView.IsMine) return;  //내 컴퓨터에서 원본만 움직이기 위한 조건 _ 실제 원본이냐 다른 클라이언트에서 만든 원본이냐의 차이
         if (isDead) return;
 
         float X = Input.GetAxisRaw("Horizontal");
@@ -63,7 +63,8 @@ public class PlayerCtrl : MonoBehaviourPun
         this.transform.rotation = Quaternion.AngleAxis(-angle + 90.0f, Vector3.up);
     }
 
-    [PunRPC]
+    [PunRPC] //Remote Processisor Call 
+    //원격 호출 
     public void ApplyHp(int _hp)
     {
         hp = _hp;
@@ -73,6 +74,7 @@ public class PlayerCtrl : MonoBehaviourPun
             Debug.LogErrorFormat("Destroy: {0}", PhotonNetwork.NickName);
             isDead = true;
             PhotonNetwork.Destroy(this.gameObject);
+            //복사본이 동시에 파괴
         }
     }
     
@@ -81,6 +83,13 @@ public class PlayerCtrl : MonoBehaviourPun
     {
         hp -= _dmg;
         photonView.RPC("ApplyHp", RpcTarget.Others, hp);
+        //체력을 깎은 다음 동기화
+    }
+
+    [PunRPC]
+    public void SetPlayerColor()
+    {
+        photonView.RPC("SetMaterial", RpcTarget.Others);
     }
 
 }

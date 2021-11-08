@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 8450419451319479050}
   - component: {fileID: 6232756993994293316}
   - component: {fileID: 8979860358036308297}
-  - component: {fileID: 4221742121419955617}
   - component: {fileID: 3817855254515720454}
   m_Layer: 0
   m_Name: P_Bullet
@@ -138,18 +137,6 @@ MonoBehaviour:
   m_SynchronizeRotation: 0
   m_SynchronizeScale: 0
   m_UseLocal: 1
---- !u!114 &4221742121419955617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6117365946087543840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6f295fc85167f242a3bc682ce7bb886, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3817855254515720454
 MonoBehaviour:
   m_ObjectHideFlags: 0
