@@ -86,13 +86,14 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
         //static으로 함수를 만들경우 안에 변수도 static이어야 하지만 지금처럼 있는 것을 사용하는 경우는 무관
     }
 
-    public override void OnJoinedRoom()
+    public override void OnJoinedRoom( )
     {
         Debug.Log("Joined Room");
         // 마스터가 동시에 게임을 시작하게 하는 구조가 아니기 때문에 각자 씬을 부르면 됨
         // PhotonNetwork,LoadLevel("Room") 레디를 하고 게임을 시작하는 경우 이 함수를 사용
 
         SceneManager.LoadScene("Room");
+        
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)

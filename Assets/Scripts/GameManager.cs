@@ -9,9 +9,16 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviourPunCallbacks
 {
     [SerializeField] private GameObject playerPrefab = null;
+
+    Player player;
+    int PlayerNum = 0;
+    private void Awake()
+    {
+
+    }
     void Start()
     {
-        if(playerPrefab != null)
+        if (playerPrefab != null)
         {
             GameObject go = PhotonNetwork.Instantiate(
                 playerPrefab.name,
@@ -21,14 +28,25 @@ public class GameManager : MonoBehaviourPunCallbacks
             // 서버에 들어가 있는 내용
             //파일명이 들어가야 만들어짐
 
+            PlayerNum = PhotonNetwork.CountOfPlayers;
             go.GetComponent<PlayerCtrl>().SetMaterial(PhotonNetwork.CountOfPlayers);
-            go.GetComponent<PlayerCtrl>().SetPlayerColor();
+            go.GetComponent<PlayerCtrl>().SetPlayer(PhotonNetwork.CountOfPlayers,player);
+            
+
+        }
+
+ 
+            foreach(Player player in PhotonNetwork.PlayerList)
+        {
+            Debug.LogFormat("Player Nick Name : {0}",player.NickName);
         }
     }
 
     public override void OnPlayerEnteredRoom(Player otherPlayer)
     {
         Debug.LogFormat("Player Entered Room: {0}", otherPlayer.NickName);
+
+
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)

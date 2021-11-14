@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Photon.Pun;
+using Photon.Realtime;
+
+using UnityEngine.UI;
 public class PlayerCtrl : MonoBehaviourPun
 {
     private Rigidbody rb = null;
@@ -11,18 +14,44 @@ public class PlayerCtrl : MonoBehaviourPun
 
     [SerializeField] private Color[] colors = null;
     [SerializeField] private float speed = 3.0f;
+    Player[] players = PhotonNetwork.PlayerList;
 
     private int hp = 3;
     private bool isDead = false;
 
+    private int colorNum = 0;
+
+    PhotonView photonview = null;
+    [SerializeField] Text PlayerName;
+
+    Player player;
+
+    public int PlayerNum;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        photonview = GetComponent<PhotonView>();
+
+        //if (!photonview.IsMine) SetMaterial(PlayerNum);
+
     }
     void Start()
     {
         isDead = false;
+
+        if (player == players[0]) SetMaterial(1);
+
     }
+
+    [PunRPC]
+    public void PlayerColorChange( Vector3 color_)
+    {
+        Color color = new Color(color_.x, color_.y, color_.z);
+        gameObject.GetComponent<MeshRenderer>().material.color = color;
+
+    }
+
 
     void Update()
     {
@@ -32,17 +61,31 @@ public class PlayerCtrl : MonoBehaviourPun
         float X = Input.GetAxisRaw("Horizontal");
         float Z = Input.GetAxisRaw("Vertical");
         Vector3 Move = new Vector3(X, 0, Z).normalized;
-        rb.AddForce(Move * speed);
+        rb.velocity = Move * speed;
 
         if (Input.GetMouseButtonDown(0)) ShootBullet();
         LookAtMouseCusor();
     }
-
+    [PunRPC]
     public void SetMaterial(int _playerNum)
     {
-        Debug.LogError(_playerNum + " : " + colors.Length);
-        if (_playerNum > colors.Length) return;
-        this.GetComponent<MeshRenderer>().material.color = colors[_playerNum-1];
+
+            Debug.LogError(_playerNum + " : " + colors.Length);
+            if (_playerNum > colors.Length) return;
+            this.GetComponent<MeshRenderer>().material.color = colors[_playerNum-1];
+    }
+
+    public void SetPlayer(int Num, Player player)
+    {
+            PlayerNum = Num;
+        players[Num-1] = player;
+    }
+
+
+    public void SetUp(Player player_)
+    {
+        player = player_;
+        PlayerName.text = player_.NickName;
     }
 
     private void ShootBullet()
@@ -86,10 +129,8 @@ public class PlayerCtrl : MonoBehaviourPun
         //체력을 깎은 다음 동기화
     }
 
-    [PunRPC]
-    public void SetPlayerColor()
-    {
-        photonView.RPC("SetMaterial", RpcTarget.Others);
-    }
+
+
+
 
 }
