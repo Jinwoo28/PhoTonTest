@@ -6,7 +6,7 @@ using Photon.Pun;
 using Photon.Realtime;
 
 using UnityEngine.UI;
-public class PlayerCtrl : MonoBehaviourPun
+public class PlayerCtrl : MonoBehaviourPun //IPunInstantiateMagicCallback
 {
     private Rigidbody rb = null;
 
@@ -129,7 +129,14 @@ public class PlayerCtrl : MonoBehaviourPun
         //체력을 깎은 다음 동기화
     }
 
+    //public void OnPhotonInstantiate(PhotonMessageInfo info)
+    //{
+    //    // 전체에게 통지하기 떄문에 마스터만 처리
+    //    if (!PhotonNetwork.IsMasterClient) return;
 
+    //    // 게임매니저에 정의되어 있는 함수 호출
+    //    FindObjectOfType<GameManager>().ApplyPlayerList();
+    //}
 
 
 
