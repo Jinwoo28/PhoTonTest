@@ -14,7 +14,11 @@ public class GameManager : MonoBehaviourPunCallbacks
     // 각 클라이언트 마다 생성된 플레이어 게임 오브젝트를 리스트로 관리
     private List<GameObject> playerGoList = new List<GameObject>();
 
+<<<<<<< Updated upstream
 
+=======
+    public static GameManager Gm;
+>>>>>>> Stashed changes
 
     private void Start()
     {
@@ -56,10 +60,16 @@ public class GameManager : MonoBehaviourPunCallbacks
     [PunRPC]
     public void RPCApplyPlayerList()
     {
+<<<<<<< Updated upstream
         int playerCnt = PhotonNetwork.CurrentRoom.PlayerCount;      // playerCnt에 현재 방의 플레이어 수를 넣음
         // 플레이어 리스트가 최신이라면 건너뜀
         if (playerCnt == playerGoList.Count) return;
         //playerCnt와 플레이어GoList에 들어있는 플레이어 수가 같다면 PlayerCnt는 현재 방에 있는 플레이어 오브젝트가 모두 카운트 되었음.
+=======
+        int playerCnt = PhotonNetwork.CurrentRoom.PlayerCount;
+        // 플레이어 리스트가 최신이라면 건너뜀
+        if (playerCnt == playerGoList.Count) return;
+>>>>>>> Stashed changes
 
         // 현재 방에 접속해 있는 플레이어의 수
         Debug.LogError("CurrentRoom PlayerCount : " + playerCnt);
@@ -69,7 +79,10 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         // 매번 재정렬을 하는게 좋으므로 플레이어 게임오브젝트 리스트를 초기화
         playerGoList.Clear();
+<<<<<<< Updated upstream
         //playerCnt가 현재 방에 있는 플레이어 게임오브젝트보다 적을 경우 초기화를 통해 다시 순서대로 넣어줘야 하기 때문에 List를 초기화 시켜준다.
+=======
+>>>>>>> Stashed changes
 
         // 현재 생성되어 있는 포톤뷰 전체와
         // 접속중인 플레이어들의 액터넘버를 비교해,

@@ -241,8 +241,11 @@ MonoBehaviour:
   - {r: 0, g: 0.26106024, b: 1, a: 0}
   - {r: 0, g: 1, b: 0.11066723, a: 0}
   speed: 3
+<<<<<<< Updated upstream
   PlayerName: {fileID: 0}
   PlayerNum: 0
+=======
+>>>>>>> Stashed changes
 --- !u!54 &3634926358296761007
 Rigidbody:
   m_ObjectHideFlags: 0

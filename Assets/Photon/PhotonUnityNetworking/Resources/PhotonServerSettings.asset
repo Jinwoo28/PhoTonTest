@@ -42,8 +42,11 @@ MonoBehaviour:
   - ApplyHp
   - OnDamage
   - SetPlayerColor
+<<<<<<< Updated upstream
   - PlayerColorChange
   - SetMaterial
+=======
+>>>>>>> Stashed changes
   - RPCApplyPlayerList
   DisableAutoOpenWizard: 1
   ShowSettings: 0
